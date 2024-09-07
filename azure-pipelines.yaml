@@ -1,0 +1,25 @@
+pool:
+  name: "docker-ubuntu-pool"
+resources:
+  repositories: 
+    - repository: templates 
+      type: github
+      name: phamsang1301/cloud_devops_2
+      endpoint: github.com_phamsang1301
+      ref: main 
+jobs:
+- job: build
+  steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.10.14'
+        addToPath: true
+
+    - script: make install
+      displayName: 'Install dependencies'
+
+    - script: make lint
+      displayName: 'Lint with pylint'
+
+    - script: make test
+      displayName: 'Test with pytest'
