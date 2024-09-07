@@ -6,7 +6,9 @@ resources:
       type: github
       name: phamsang1301/cloud_devops_2
       endpoint: github.com_phamsang1301
-      ref: main 
+      ref: main
+trigger:
+- main
 jobs:
 - job: build
   steps:
