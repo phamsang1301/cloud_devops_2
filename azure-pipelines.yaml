@@ -43,7 +43,7 @@ jobs:
 
     - task: AzureWebApp@1
       inputs:
-        azureSubscription: 'studen'
+        azureSubscription: 'student'
         appType: 'webApp'
         appName: 'udacity'
         package: '$(Build.ArtifactStagingDirectory)/starter_files/flask-sklearn/flask_app.zip'
