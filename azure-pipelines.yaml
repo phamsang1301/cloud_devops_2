@@ -25,26 +25,26 @@ jobs:
         pip install -r requirements.txt
       displayName: 'Install dependencies'
 
-    # - task: ArchiveFiles@2
-    #   inputs:
-    #     rootFolderOrFile: '$(Build.SourcesDirectory)'
-    #     includeRootFolder: false
-    #     archiveType: 'zip'
-    #     archiveFile: '$(Build.ArtifactStagingDirectory)/flask_app.zip'
-    #     replaceExistingArchive: true
-    #   displayName: 'Archive Flask App'
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/starter_files/flask-sklearn/flask_app.zip'
+        replaceExistingArchive: true
+      displayName: 'Archive Flask App'
 
-    # - task: PublishBuildArtifacts@1
-    #   inputs:
-    #     PathtoPublish: '$(Build.ArtifactStagingDirectory)/flask_app.zip'
-    #     ArtifactName: 'drop'
-    #     publishLocation: 'Container'
-    #   displayName: 'Publish Build Artifacts'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/starter_files/flask-sklearn/flask_app.zip'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+      displayName: 'Publish Build Artifacts'
 
-    # - task: AzureWebApp@1
-    #   inputs:
-    #     azureSubscription: '<Your Azure Subscription>'
-    #     appType: 'webApp'
-    #     appName: '<Your App Service Name>'
-    #     package: '$(Build.ArtifactStagingDirectory)/flask_app.zip'
-    #   displayName: 'Deploy to Azure Web App'
+    - task: AzureWebApp@1
+      inputs:
+        azureSubscription: 'studen'
+        appType: 'webApp'
+        appName: 'udacity'
+        package: '$(Build.ArtifactStagingDirectory)/starter_files/flask-sklearn/flask_app.zip'
+      displayName: 'Deploy to Azure Web App'
