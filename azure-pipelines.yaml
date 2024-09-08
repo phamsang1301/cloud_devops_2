@@ -12,16 +12,37 @@ trigger:
 jobs:
 - job: build
   steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '3.10.14'
-        addToPath: true
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(pythonVersion)'
+      addToPath: true
 
-    - script: make install
-      displayName: 'Install dependencies'
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install dependencies'
 
-    - script: make lint
-      displayName: 'Lint with pylint'
+  # - task: ArchiveFiles@2
+  #   inputs:
+  #     rootFolderOrFile: '$(Build.SourcesDirectory)'
+  #     includeRootFolder: false
+  #     archiveType: 'zip'
+  #     archiveFile: '$(Build.ArtifactStagingDirectory)/flask_app.zip'
+  #     replaceExistingArchive: true
+  #   displayName: 'Archive Flask App'
 
-    - script: make test
-      displayName: 'Test with pytest'
+  # - task: PublishBuildArtifacts@1
+  #   inputs:
+  #     PathtoPublish: '$(Build.ArtifactStagingDirectory)/flask_app.zip'
+  #     ArtifactName: 'drop'
+  #     publishLocation: 'Container'
+  #   displayName: 'Publish Build Artifacts'
+
+  # - task: AzureWebApp@1
+  #   inputs:
+  #     azureSubscription: '<Your Azure Subscription>'
+  #     appType: 'webApp'
+  #     appName: '<Your App Service Name>'
+  #     package: '$(Build.ArtifactStagingDirectory)/flask_app.zip'
+  #   displayName: 'Deploy to Azure Web App'
