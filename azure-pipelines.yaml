@@ -9,6 +9,9 @@ resources:
       ref: main
 trigger:
 - main
+variables:
+  # Set the Python version to be used
+  pythonVersion: '3.10'
 jobs:
 - job: build
   steps:
